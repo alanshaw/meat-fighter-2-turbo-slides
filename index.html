@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Meat Fighter 2 Turbo</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h1>Meat Fighter 2 Turbo</h1>
+        <p>Alan Shaw<br><a href="http://twitter.com/_alanshaw">@_alanshaw</a><br><a href="http://tableflip.io">http://tableflip.io</a><br>JavaScript Adventure Club</p>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>An experiment with meteor and websockets.</h2>
+        <h3>I wanted to see if I could build a game with Meteor.</h3>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 style="margin-bottom:1em;"><span style="font-weight:normal">SSID:</span><br><code>Makers Academy</code></h2>
+        <h2><span style="font-weight:normal">Open:</span><br><code>http://192.168.50.105:1337</code></h2>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>Make with socket.io</h2>
+        <pre style="text-align:left" class="bullet">                   +---> client
+                   |
+client ---> server +---> client
+                   |
+                   +---> client</pre>
+        <ul>
+          <li>Client emits player state (position, hit, life)</li>
+          <li>Server broadcasts the info</li>
+          <li>Client listens for other player state updates</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>I envisioned an Meteor version like this:</h2>
+        <pre style="text-align:left">                   \  |  /
+client            - MAGIC -       +---> client
+ |                 /  |  \        |
+ |                                +---> client
+ +---> Players                    |
+                                  +---> client</pre>
+        <ul>
+          <li>Meteor does the magic bit really well</li>
+          <li>What is the magic bit?</li>
+          <li>Synchronising state between clients</li>
+          <li>Mongo collections</li>
+          <li>Your client interacts with a local collection</li>
+          <li>Changes appear in other connected client's collections</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 style="margin-bottom:1em;"><span style="font-weight:normal">SSID:</span><br><code>Makers Academy</code></h2>
+        <h2><span style="font-weight:normal">Open:</span><br><code>http://192.168.50.105:3000</code></h2>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 class="bullet">I figured:</h2>
+        <ul>
+          <li>Still websockets</li>
+          <li>DDP efficient transport - only communicating changes</li>
+          <li>No more poll&amp;diff</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 class="bullet">What I ended up doing:</h2>
+        <ul>
+          <li>Wrote a <code>MeteorTransport.js</code><br>to present <code>Players</code> collection as a socket.io interface</li>
+          <li>Code share FTW</li>
+          <li><code>Connections</code> collection manages who's connected</li>
+          <li>Pinging server FML</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>Any ideas why websockets outperform meteor in this case?</h2>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 class="bullet">Theories:</h2>
+        <ul>
+          <li>Extra overhead calculating what's changed</li>
+          <li>Writing to disk</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 class="bullet">Caveats apply:</h2>
+        <ul>
+          <li>I'm not a game programmer</li>
+          <li>I have no idea what I'm doing</li>
+          <li>Crude implementation - no batches, no timestamps</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2 class="bullet">Could you write a game in Meteor?</h2>
+        <ul>
+          <li>Absolutely!</li>
+          <li>but...maybe not a realtime game right now</li>
+          <li>Redis support in the future might fix this</li>
+        </ul>
+      </section>
+      <section data-bespoke-backdrop="emphatic" class="emphatic-text">
+        <h2>Thank you!</h2>
+        <h3><a href="https://github.com/alanshaw/meat-fighter-2-turbo">github.com/alanshaw/meat-fighter-2-turbo</a><br><a href="http://twitter.com/_alanshaw">@_alanshaw</a></h3>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
