@@ -1,0 +1,133 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title Meat Fighter 2 Turbo
+
+    link(rel='stylesheet', type='text/css', href='build/build.css')
+
+  body
+
+    article
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h1 Meat Fighter 2 Turbo
+        p
+          | Alan Shaw
+          br
+          a(href='http://twitter.com/_alanshaw') @_alanshaw
+          br
+          a(href='http://tableflip.io') http://tableflip.io
+          br
+          | JavaScript Adventure Club
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 An experiment with meteor and websockets.
+        h3 I wanted to see if I could build a game with Meteor.
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2(style='margin-bottom:1em;')
+          span(style="font-weight:normal") SSID:
+          br
+          code Makers Academy
+        h2 
+          span(style="font-weight:normal") Open:
+          br
+          code http://192.168.50.105:1337
+
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 Make with socket.io
+
+        pre.bullet(style='text-align:left')
+          |                    +---> client
+          |                    |
+          |client ---> server +---> client
+          |                    |
+          |                    +---> client
+
+        ul
+          li Client emits player state (position, hit, life)
+          li Server broadcasts the info
+          li Client listens for other player state updates
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 I envisioned an Meteor version like this:
+
+        
+        pre(style='text-align:left')
+          |                    \  |  /
+          |client            - MAGIC -       +---> client
+          |  |                 /  |  \        |
+          |  |                                +---> client
+          |  +---> Players                    |
+          |                                   +---> client
+
+        ul
+          li Meteor does the magic bit really well
+          li What is the magic bit?
+          li Synchronising state between clients
+          li Mongo collections
+          li Your client interacts with a local collection
+          li Changes appear in other connected client's collections
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2(style='margin-bottom:1em;')
+          span(style="font-weight:normal") SSID:
+          br
+          code Makers Academy
+        h2 
+          span(style="font-weight:normal") Open:
+          br
+          code http://192.168.50.105:3000
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2.bullet I figured:
+        ul
+          li Still websockets
+          li DDP efficient transport - only communicating changes
+          li No more poll&amp;diff
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2.bullet What I ended up doing:
+        ul
+          li Wrote a <code>MeteorTransport.js</code>
+            br
+            | to present <code>Players</code> collection as a socket.io interface
+          li Code share FTW
+          li <code>Connections</code> collection manages who's connected
+          li Pinging server FML
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 Any ideas why websockets outperform meteor in this case?
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2.bullet Theories:
+        ul
+          li Extra overhead calculating what's changed
+          li Writing to disk
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2.bullet Caveats apply:
+        ul
+          li I'm not a game programmer
+          li I have no idea what I'm doing
+          li Crude implementation - no batches, no timestamps
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2.bullet Could you write a game in Meteor?
+        ul
+          li Absolutely!
+          li but...maybe not a realtime game right now
+          li Redis support in the future might fix this
+
+      section.emphatic-text(data-bespoke-backdrop='emphatic')
+        h2 Thank you!
+        h3
+          a(href='https://github.com/alanshaw/meat-fighter-2-turbo')
+            | github.com/alanshaw/meat-fighter-2-turbo
+          br
+          a(href='http://twitter.com/_alanshaw') @_alanshaw
+
+    script(src='build/build.js')

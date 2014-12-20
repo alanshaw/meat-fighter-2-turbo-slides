@@ -1,0 +1,7 @@
+{
+  "name": "presentation-meat-fighter-2-turbo",
+  "version": "0.0.0",
+  "dependencies": {
+    "prism": "gh-pages"
+  }
+}
